@@ -22,8 +22,8 @@ const CustomButton: FC<Props> = (props) => {
     minWidth = "w-full",
   } = props;
 
-  const commonStyles = `px-4 py-1 rounded bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 ${minWidth}`;
-  const iconStyle = `w-10 h-10 text-white flex items-center justify-center rounded-full bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 p-3`;
+  const commonStyles = `px-4 py-1 rounded bg-[#ADC6FF] font-semibold text-[#002E6A] hover:bg-[#ADC6FF] focus:outline-none focus:ring-2 focus:ring-[#ADC6FF] focus:ring-opacity-75 ${minWidth}`;
+  const iconStyle = `w-10 h-10 text-[#002E6A] flex items-center justify-center rounded-full bg-[#ADC6FF] hover:bg-[#ADC6FF] focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 p-3`;
   return (
     <button
       type={type}

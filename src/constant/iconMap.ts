@@ -6,6 +6,9 @@ import { IoEyeOutline } from "react-icons/io5";
 import { IoEyeOffOutline } from "react-icons/io5";
 import { CiBellOn } from "react-icons/ci";
 import { FaRegUser } from "react-icons/fa";
+import { TfiEmail } from "react-icons/tfi";
+import { MdLockOutline } from "react-icons/md";
+import { GoShieldLock } from "react-icons/go";
 
 export const iconMap = {
   printer: FiPrinter,
@@ -16,4 +19,7 @@ export const iconMap = {
   closeEye: IoEyeOffOutline,
   profile: FaRegUser,
   notification: CiBellOn,
+  email: TfiEmail,
+  password: MdLockOutline,
+  shield: GoShieldLock,
 } as const;
