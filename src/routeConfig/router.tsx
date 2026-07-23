@@ -4,6 +4,7 @@ import AuthLayout from "../layout/AuthLayout";
 import LoginForm from "../modules/auth/pages/Login";
 import SignUpForm from "../modules/auth/pages/Signup";
 import MainLayout from "../layout/MainLayout";
+import Expense from "../modules/expense/pages/Expense";
 export const router = createBrowserRouter([
   {
     element: <AuthLayout />,
@@ -21,7 +22,12 @@ export const router = createBrowserRouter([
   },
   {
     element: <MainLayout />,
-    path: "/dashboard",
-    children: [],
+    path: "/",
+    children: [
+      {
+        element: <Expense />,
+        path: "/expense",
+      },
+    ],
   },
 ]);
