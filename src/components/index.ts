@@ -5,6 +5,7 @@ import TopBar from "./TopBar";
 import SideBar from "./SideBar";
 import CustomText from "./CustomText";
 import CustomCheckBox from "./CustomCheckBox";
+import CustomTable from "./CustomTable";
 export {
   CustomCheckBox,
   CustomButton,
@@ -13,4 +14,5 @@ export {
   TopBar,
   SideBar,
   CustomText,
+  CustomTable,
 };
