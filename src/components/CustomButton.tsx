@@ -9,7 +9,7 @@ type Props = {
   startIcon?: boolean;
   icon?: keyof typeof iconMap;
   minWidth?: string;
-  handleClick: () => void;
+  handleClick?: () => void;
 };
 
 const CustomButton: FC<Props> = (props) => {
