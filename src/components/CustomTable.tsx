@@ -18,24 +18,24 @@ const CustomTable: FC<Props> = (props) => {
   };
 
   return (
-    <div className="bg-red-300 my-5">
+    <div className="my-5 border border-gray-200">
       {/* header  */}
 
-      <div className="bg-green-300 flex">
+      <div className="flex overflow-hidden">
         {columns?.map((value) => {
           return (
-            <div className="bg-green-300 flex flex-col flex-1 ">
+            <div className="flex flex-col flex-1 bg-[#1C1B1D] rounded-md">
               <div
                 key={value?.header}
-                className={`p-1 bg-blue-200 flex-1 ${value?.align ? textAlign[value?.align] : "text-left"} w-full`}
+                className={` overflow-hidden p-1 flex-1 ${value?.align ? textAlign[value?.align] : "text-left"} w-full `}
               >
                 <CustomText variant="h6">{value?.header}</CustomText>
               </div>
-              <div className="flex flex-col flex-1">
+              <div className="flex flex-col flex-1 bg-black rounded-md">
                 {row.map((exp) => {
                   return (
                     <div
-                      className={`p-1 bg-blue-200 flex-1 ${value?.align ? textAlign[value?.align] : "text-left"} w-full`}
+                      className={`p-1 flex-1 ${value?.align ? textAlign[value?.align] : "text-left"} w-full`}
                     >
                       <CustomText variant="p">{exp[value?.value]}</CustomText>
                     </div>

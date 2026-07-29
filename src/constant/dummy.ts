@@ -1,6 +1,3 @@
-
-
-
 export const expenseDummy = [
   {
     date: "7/25/2026",
@@ -43,5 +40,20 @@ export const expenseDummy = [
     amount: 3500,
     category: "food",
     status: "pending",
+  },
+];
+
+export const dropDownListDummy = [
+  {
+    value: "Bills",
+    id: 1,
+  },
+  {
+    value: "School fee",
+    id: 2,
+  },
+  {
+    value: "Milk",
+    id: 3,
   },
 ];
