@@ -1,6 +1,29 @@
+import { useForm } from "react-hook-form";
 import { CustomButton, CustomInput, CustomText } from "../../../components";
 import { Link } from "react-router-dom";
+
+type SignupFormType = {
+  fullName: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+};
+
 const SignUpForm = () => {
+  const { register, handleSubmit } = useForm<SignupFormType>({
+    defaultValues: {
+      fullName: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
+  });
+
+  // signupform
+  const onSubmit = (values: SignupFormType) => {
+    console.log(values);
+  };
+
   return (
     <div className="  flex flex-col gap-4 items-start justify-center w-full p-4">
       <div className="w-full">
@@ -9,21 +32,37 @@ const SignUpForm = () => {
           Start managing your precision finance journey today.
         </CustomText>
       </div>
-      <form className="w-full flex flex-col gap-2">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="w-full flex flex-col gap-2"
+      >
         <CustomInput
+          name="fullName"
+          register={register}
           type="text"
           label="Full Name"
           icon={true}
           iconName="profile"
         />
-        <CustomInput type="text" label="Email" icon={true} iconName={"email"} />
         <CustomInput
+          name="email"
+          register={register}
+          type="email"
+          label="Email"
+          icon={true}
+          iconName={"email"}
+        />
+        <CustomInput
+          name="password"
+          register={register}
           type="password"
           label="Password"
           icon={true}
           iconName={"password"}
         />
         <CustomInput
+          name="confirmPassword"
+          register={register}
           type="password"
           label="Confirm Password"
           icon={true}

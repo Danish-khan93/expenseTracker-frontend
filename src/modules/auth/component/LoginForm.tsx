@@ -1,6 +1,26 @@
+import { useForm } from "react-hook-form";
 import { CustomButton, CustomInput, CustomText } from "../../../components";
 import { Link } from "react-router-dom";
+
+type LoginFormType = {
+  email: string;
+  password: string;
+};
+
 const LoginForm = () => {
+  const { register, handleSubmit } = useForm<LoginFormType>({
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+
+  // form submit function
+
+  const onSubmit = (values: LoginFormType) => {
+    console.log(values);
+  };
+
   return (
     <div className="  flex flex-col gap-4 items-start justify-center w-full p-4">
       <div className="w-full">
@@ -10,9 +30,21 @@ const LoginForm = () => {
         </CustomText>
       </div>
 
-      <form className="w-full flex flex-col gap-2">
-        <CustomInput type="text" label="Email" icon={true} iconName={"email"} />
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="w-full flex flex-col gap-2"
+      >
         <CustomInput
+          type="email"
+          label="Email"
+          icon={true}
+          iconName={"email"}
+          name={"email"}
+          register={register}
+        />
+        <CustomInput
+          name={"password"}
+          register={register}
           type="password"
           label="Password"
           icon={true}
