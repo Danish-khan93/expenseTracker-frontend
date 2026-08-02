@@ -1,16 +1,25 @@
 import CustomIcon from "./CustomIcon";
-import { useState, type FC } from "react";
+import { useState } from "react";
 import { iconMap } from "../constant/iconMap";
-type Props = {
-  icon?: boolean;
+import type { FieldValues, Path, UseFormRegister } from "react-hook-form";
+type Props<T extends FieldValues> = {
+  icon: boolean;
   iconName?: keyof typeof iconMap;
-  type?: "text" | "password" | "email" | "number";
+  type: "text" | "password" | "email" | "number";
   label: string;
-  name?: string;
+  name: Path<T>;
+  register: UseFormRegister<T>;
 };
 
-const CustomInput: FC<Props> = (props) => {
-  const { icon = false, iconName, type = "text", label, name } = props;
+const CustomInput = <T extends FieldValues>(props: Props<T>) => {
+  const {
+    icon = false,
+    iconName,
+    type = "text",
+    label,
+    name,
+    register,
+  } = props;
 
   // password visibility toggle state
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -22,6 +31,7 @@ const CustomInput: FC<Props> = (props) => {
       <div className="w-full bg-[#1C1B1D] border-2 border-[#424754] rounded-md p-2 flex items-center gap-1">
         {icon === true && iconName && <CustomIcon iconName={iconName} />}
         <input
+          {...register(name)}
           id={name}
           name={name}
           className="border-none focus:outline-none w-full"
