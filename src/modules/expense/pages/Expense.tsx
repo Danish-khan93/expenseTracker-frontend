@@ -31,7 +31,12 @@ const Expense = () => {
       </div>
       {/* <div>filter</div> */}
       <div>
-        <CustomTable columns={expenseCols} row={expenseDummy} />
+        <CustomTable
+          columns={expenseCols}
+          rows={expenseDummy}
+          navigateById={true}
+          textPosition="left"
+        />
       </div>
     </div>
   );

@@ -37,6 +37,10 @@ export const router = createBrowserRouter([
         element: <ExpenseFormPage />,
         path: "/expense/new",
       },
+      {
+        element: <ExpenseFormPage />,
+        path: "/expense/:id",
+      },
     ],
   },
 ]);
