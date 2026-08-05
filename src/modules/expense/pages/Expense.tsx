@@ -1,6 +1,7 @@
 import { CustomButton, CustomTable, CustomText } from "../../../components";
 import { useNavigate } from "react-router-dom";
 import { expenseCols } from "../../../constant/girdColumn";
+import { expenseDummy } from "../../../constant/dummy";
 const Expense = () => {
   const navigate = useNavigate();
 
@@ -30,7 +31,12 @@ const Expense = () => {
       </div>
       {/* <div>filter</div> */}
       <div>
-        <CustomTable columns={expenseCols} />
+        <CustomTable
+          columns={expenseCols}
+          rows={expenseDummy}
+          navigateById={true}
+          textPosition="left"
+        />
       </div>
     </div>
   );

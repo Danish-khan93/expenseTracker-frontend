@@ -10,6 +10,9 @@ import { TfiEmail } from "react-icons/tfi";
 import { MdLockOutline } from "react-icons/md";
 import { GoShieldLock } from "react-icons/go";
 import { FaPlus } from "react-icons/fa6";
+import { IoSaveOutline } from "react-icons/io5";
+import { LuLayoutDashboard } from "react-icons/lu";
+import { IoMdPaper } from "react-icons/io";
 
 export const iconMap = {
   printer: FiPrinter,
@@ -24,4 +27,7 @@ export const iconMap = {
   password: MdLockOutline,
   shield: GoShieldLock,
   plus: FaPlus,
+  save: IoSaveOutline,
+  dashboard: LuLayoutDashboard,
+  expense: IoMdPaper,
 } as const;

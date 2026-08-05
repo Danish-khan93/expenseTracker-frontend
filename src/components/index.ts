@@ -6,6 +6,7 @@ import SideBar from "./SideBar";
 import CustomText from "./CustomText";
 import CustomCheckBox from "./CustomCheckBox";
 import CustomTable from "./CustomTable";
+import CustomDatePicker from "./CustomDatePicker";
 export {
   CustomCheckBox,
   CustomButton,
@@ -15,4 +16,5 @@ export {
   SideBar,
   CustomText,
   CustomTable,
+  CustomDatePicker,
 };
