@@ -53,9 +53,13 @@ const CustomTable: FC<Props> = (props) => {
                 return (
                   <div
                     key={ind}
-                    className={`flex flex-1 w-full ${justifyAlign[textPosition]}`}
+                    className={`flex flex-1 w-full ${justifyAlign[textPosition]} `}
                   >
-                    <CustomText variant="p">{row[col?.value]}</CustomText>
+                    <div
+                      className={`${col?.highlight && "bg-red-500 p-1 rounded-md w-auto "}`}
+                    >
+                      <CustomText variant="p">{row[col?.value]}</CustomText>
+                    </div>
                   </div>
                 );
               })}

@@ -12,6 +12,7 @@ export type ColumnType<T> = {
   width?: number;
   align?: "left" | "center" | "right";
   value: keyof T;
+  highlight?: boolean;
 };
 
 export const expenseCols: ColumnType<ExpenseResType>[] = [
@@ -40,5 +41,6 @@ export const expenseCols: ColumnType<ExpenseResType>[] = [
     value: "status",
     header: "Status",
     align: "center",
+    highlight: true,
   },
 ];
