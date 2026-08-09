@@ -7,6 +7,7 @@ import CustomText from "./CustomText";
 import CustomCheckBox from "./CustomCheckBox";
 import CustomTable from "./CustomTable";
 import CustomDatePicker from "./CustomDatePicker";
+import CustomSwitch from "./CustomSwitch";
 export {
   CustomCheckBox,
   CustomButton,
@@ -17,4 +18,5 @@ export {
   CustomText,
   CustomTable,
   CustomDatePicker,
+  CustomSwitch,
 };

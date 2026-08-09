@@ -9,7 +9,7 @@ const MainLayout = () => {
       </div>
       <div>
         <TopBar />
-        <div>
+        <div className="px-8 py-3">
           <Outlet />
         </div>
       </div>

@@ -6,6 +6,8 @@ import SignUpForm from "../modules/auth/pages/Signup";
 import MainLayout from "../layout/MainLayout";
 import Expense from "../modules/expense/pages/Expense";
 import ExpenseFormPage from "../modules/expense/pages/ExpenseFormPage";
+import Categories from "../modules/category/pages/Categories";
+import CategoiesFormPage from "../modules/category/pages/CategoiesFormPage";
 export const router = createBrowserRouter([
   {
     element: <AuthLayout />,
@@ -40,6 +42,14 @@ export const router = createBrowserRouter([
       {
         element: <ExpenseFormPage />,
         path: "/expense/:id",
+      },
+      {
+        element: <Categories />,
+        path: "/categories",
+      },
+      {
+        element: <CategoiesFormPage />,
+        path: "/categories/form",
       },
     ],
   },

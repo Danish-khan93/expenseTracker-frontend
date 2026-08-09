@@ -23,6 +23,12 @@ const SideBar = () => {
       path: "/expense",
       icon: "expense",
     },
+    {
+      id: 3,
+      title: "Categoires",
+      path: "/categories",
+      icon: "category",
+    },
   ];
 
   return (
