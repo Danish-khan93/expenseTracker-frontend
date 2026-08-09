@@ -17,6 +17,10 @@ import { MdOutlineCategory } from "react-icons/md";
 import { IoHomeOutline } from "react-icons/io5";
 import { IoFastFoodOutline } from "react-icons/io5";
 import { FaCarAlt } from "react-icons/fa";
+import { FaBriefcaseMedical } from "react-icons/fa";
+import { LuUtilityPole } from "react-icons/lu";
+import { FaShoppingCart } from "react-icons/fa";
+import { TbMeat } from "react-icons/tb";
 
 export const iconMap = {
   printer: FiPrinter,
@@ -39,4 +43,8 @@ export const iconMap = {
   home: IoHomeOutline,
   food: IoFastFoodOutline,
   transport: FaCarAlt,
+  medical: FaBriefcaseMedical,
+  utilities: LuUtilityPole,
+  groseory: FaShoppingCart,
+  meat: TbMeat,
 } as const;
