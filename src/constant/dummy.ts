@@ -1,3 +1,5 @@
+import type { iconMap } from "./iconMap";
+
 export const expenseDummy = [
   {
     id: 1,
@@ -61,5 +63,33 @@ export const dropDownListDummy = [
   {
     value: "Milk",
     id: 3,
+  },
+];
+
+export type CategoryType = {
+  id: number;
+  categoryName: string;
+  iconName: keyof typeof iconMap;
+  color: string;
+};
+
+export const categoryList: CategoryType[] = [
+  {
+    id: 1,
+    categoryName: "Home",
+    iconName: "home",
+    color: "#ADC6FF",
+  },
+  {
+    id: 2,
+    categoryName: "Home",
+    iconName: "transport",
+    color: "#ADC6FF",
+  },
+  {
+    id: 3,
+    categoryName: "Home",
+    iconName: "food",
+    color: "#ADC6FF",
   },
 ];
