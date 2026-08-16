@@ -4,3 +4,23 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   filter: invert(1);
   cursor: pointer;
 }
+
+/* Fancy scrollbar */
+.fancy-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.fancy-scrollbar::-webkit-scrollbar-track {
+  background: #c0bdc4;
+  border-radius: 10px;
+}
+
+.fancy-scrollbar::-webkit-scrollbar-thumb {
+  background: #424754;
+  border-radius: 10px;
+}
+
+.fancy-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #8c909f;
+}

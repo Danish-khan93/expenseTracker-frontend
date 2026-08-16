@@ -29,10 +29,8 @@ const CustomSelectBox = <T extends FieldValues>(props: Props<T>) => {
         className="w-full bg-[#1C1B1D] text-white border-2 border-[#424754] rounded-md p-2 "
         onChange={(e: ChangeEvent<HTMLSelectElement>) => {
           const id = e?.target?.value;
-          console.log(id, typeof id);
           const findVal = dropDownList?.find((val) => val?.id === +id);
-          console.log(findVal);
-
+        
           setter(name, findVal?.id as PathValue<T, typeof name>);
           setter(setName, findVal?.value as PathValue<T, typeof name>);
         }}
