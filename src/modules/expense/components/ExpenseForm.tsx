@@ -59,6 +59,7 @@ const ExpenseForm = () => {
           label={"Transiction Title"}
           name={"title"}
           register={register}
+          formatType="capitalCase"
         />
         <CustomInput
           icon={false}
@@ -66,6 +67,7 @@ const ExpenseForm = () => {
           label={"Amount"}
           name={"amount"}
           register={register}
+          formatType="lowerCase"
         />
         <CustomSelectBox
           setter={setValue}
@@ -89,6 +91,7 @@ const ExpenseForm = () => {
           label={"Notes"}
           name={"note"}
           register={register}
+          formatType="lowerCase"
         />
         <CustomDatePicker label={"Date"} name="date" register={register} />
       </div>
