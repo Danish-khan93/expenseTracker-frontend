@@ -1,12 +1,14 @@
 import { useState, type FC } from "react";
+import type { Dispatch, SetStateAction } from "react";
 import type { ButtonListType } from "../constant/categoryConstant";
 
 type Props = {
   listButton: ButtonListType[];
+  setCategoryType: Dispatch<SetStateAction<"expense" | "income">>;
 };
 
 const CustomSwitch: FC<Props> = (props) => {
-  const { listButton } = props;
+  const { listButton, setCategoryType } = props;
 
   // activebutton
   const [activeButton, setActiveButton] = useState<number>(1);
@@ -20,6 +22,7 @@ const CustomSwitch: FC<Props> = (props) => {
             className={`py-1 px-2 ${activeButton === value?.id ? "bg-[#A9BAD3] rounded-md" : ""}`}
             onClick={() => {
               setActiveButton(value?.id);
+              setCategoryType(value?.type);
             }}
           >
             {value?.title}
