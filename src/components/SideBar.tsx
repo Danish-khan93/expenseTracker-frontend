@@ -4,11 +4,11 @@ import { RiWallet3Fill } from "react-icons/ri";
 import CustomIcon from "./CustomIcon";
 import type { sideBarType } from "../type/sideBarType";
 const SideBar = () => {
+
+  
   const navigate = useNavigate();
   const location = useLocation();
-  // console.log(location?.pathname);
   const checkPath = location?.pathname?.split("/")[1];
-  // console.log(checkPath);
 
   const menuList: sideBarType[] = [
     {
@@ -22,6 +22,12 @@ const SideBar = () => {
       title: "Expense",
       path: "/expense",
       icon: "expense",
+    },
+    {
+      id: 3,
+      title: "Categoires",
+      path: "/categories",
+      icon: "category",
     },
   ];
 
@@ -38,7 +44,6 @@ const SideBar = () => {
         </div>
         <div>
           {menuList?.map((value) => {
-            console.log(checkPath === value?.icon);
             const isActive = checkPath === value.path.split("/")[1];
             return (
               <div

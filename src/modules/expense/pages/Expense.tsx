@@ -21,7 +21,6 @@ const Expense = () => {
             variant="textIcon"
             startIcon={true}
             handleClick={() => {
-              console.log("navigate to add expense page");
               navigate("/expense/new");
             }}
           >

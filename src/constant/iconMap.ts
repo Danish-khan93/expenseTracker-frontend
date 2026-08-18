@@ -13,6 +13,14 @@ import { FaPlus } from "react-icons/fa6";
 import { IoSaveOutline } from "react-icons/io5";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { IoMdPaper } from "react-icons/io";
+import { MdOutlineCategory } from "react-icons/md";
+import { IoHomeOutline } from "react-icons/io5";
+import { IoFastFoodOutline } from "react-icons/io5";
+import { FaCarAlt } from "react-icons/fa";
+import { FaBriefcaseMedical } from "react-icons/fa";
+import { LuUtilityPole } from "react-icons/lu";
+import { FaShoppingCart } from "react-icons/fa";
+import { TbMeat } from "react-icons/tb";
 
 export const iconMap = {
   printer: FiPrinter,
@@ -30,4 +38,13 @@ export const iconMap = {
   save: IoSaveOutline,
   dashboard: LuLayoutDashboard,
   expense: IoMdPaper,
+  category: MdOutlineCategory,
+  // category icons
+  home: IoHomeOutline,
+  food: IoFastFoodOutline,
+  transport: FaCarAlt,
+  medical: FaBriefcaseMedical,
+  utilities: LuUtilityPole,
+  groseory: FaShoppingCart,
+  meat: TbMeat,
 } as const;

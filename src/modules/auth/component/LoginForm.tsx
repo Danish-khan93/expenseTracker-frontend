@@ -41,8 +41,10 @@ const LoginForm = () => {
           iconName={"email"}
           name={"email"}
           register={register}
+          formatType="lowerCase"
         />
         <CustomInput
+          formatType="lowerCase"
           name={"password"}
           register={register}
           type="password"
