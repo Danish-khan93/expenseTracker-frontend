@@ -44,3 +44,35 @@ export const expenseCols: ColumnType<ExpenseResType>[] = [
     highlight: true,
   },
 ];
+
+
+
+export const incomeCols: ColumnType<ExpenseResType>[] = [
+  {
+    header: "Date",
+    align: "left",
+    minWidth: "w-[120px]",
+    value: "date",
+  },
+  {
+    value: "description",
+    header: "Description",
+    align: "center",
+  },
+  {
+    value: "amount",
+    header: "Amount",
+    align: "center",
+  },
+  {
+    value: "category",
+    header: "Category",
+    align: "center",
+  },
+  {
+    value: "status",
+    header: "Status",
+    align: "center",
+    highlight: true,
+  },
+];

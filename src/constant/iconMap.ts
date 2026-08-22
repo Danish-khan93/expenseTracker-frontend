@@ -21,6 +21,8 @@ import { FaBriefcaseMedical } from "react-icons/fa";
 import { LuUtilityPole } from "react-icons/lu";
 import { FaShoppingCart } from "react-icons/fa";
 import { TbMeat } from "react-icons/tb";
+import { LuLogOut } from "react-icons/lu";
+import { FaRegMoneyBill1 } from "react-icons/fa6";
 
 export const iconMap = {
   printer: FiPrinter,
@@ -47,4 +49,6 @@ export const iconMap = {
   utilities: LuUtilityPole,
   groseory: FaShoppingCart,
   meat: TbMeat,
+  logout: LuLogOut,
+  income: FaRegMoneyBill1,
 } as const;
