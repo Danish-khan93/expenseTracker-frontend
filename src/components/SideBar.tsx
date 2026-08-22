@@ -4,8 +4,6 @@ import { RiWallet3Fill } from "react-icons/ri";
 import CustomIcon from "./CustomIcon";
 import type { sideBarType } from "../type/sideBarType";
 const SideBar = () => {
-
-  
   const navigate = useNavigate();
   const location = useLocation();
   const checkPath = location?.pathname?.split("/")[1];
@@ -25,8 +23,20 @@ const SideBar = () => {
     },
     {
       id: 3,
+      title: "Income",
+      path: "/income",
+      icon: "income",
+    },
+    {
+      id: 4,
       title: "Categoires",
       path: "/categories",
+      icon: "category",
+    },
+    {
+      id: 5,
+      title: "Budget",
+      path: "/budget",
       icon: "category",
     },
   ];
@@ -62,7 +72,19 @@ const SideBar = () => {
           })}
         </div>
       </div>
-      <div>footer</div>
+      <div>
+        <div
+          onClick={() => {
+            navigate("/");
+          }}
+          className={`flex gap-2 items-center p-2 shadow-2xl rounded-md my-1 w-full hover:bg-[#3A4A5F] cursor-pointer `}
+        >
+          <div>
+            <CustomIcon iconName={"logout"} />
+          </div>
+          <div>Logout</div>
+        </div>
+      </div>
     </div>
   );
 };

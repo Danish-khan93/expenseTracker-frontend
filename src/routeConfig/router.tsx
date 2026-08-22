@@ -8,6 +8,9 @@ import Expense from "../modules/expense/pages/Expense";
 import ExpenseFormPage from "../modules/expense/pages/ExpenseFormPage";
 import Categories from "../modules/category/pages/Categories";
 import CategoiesFormPage from "../modules/category/pages/CategoiesFormPage";
+import Income from "../modules/Income/pages/Income";
+import Budgets from "../modules/budget/pages/Budgets";
+import IncomeFormPage from "../modules/Income/pages/IncomeFormPage";
 export const router = createBrowserRouter([
   {
     element: <AuthLayout />,
@@ -50,6 +53,18 @@ export const router = createBrowserRouter([
       {
         element: <CategoiesFormPage />,
         path: "/categories/form",
+      },
+      {
+        element: <Income />,
+        path: "/income",
+      },
+      {
+        element: <IncomeFormPage />,
+        path: "/income/new",
+      },
+      {
+        element: <Budgets />,
+        path: "/budget",
       },
     ],
   },

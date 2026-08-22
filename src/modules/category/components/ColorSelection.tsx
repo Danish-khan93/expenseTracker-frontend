@@ -6,7 +6,7 @@ import type {
   UseFormSetValue,
 } from "react-hook-form";
 
-const colorsList = [
+const colorList = [
   "#FF0000", // Red
   "#FF7A00", // Orange
   "#FFD000", // Yellow
@@ -34,18 +34,17 @@ type Props<T extends FieldValues> = {
 };
 
 const ColorSelection = <T extends FieldValues>(props: Props<T>) => {
-
   const { name, setter, label } = props;
-  const colorList = colorsList;
 
   const [selectedColor, setSelectedColor] = useState<string>("");
   return (
     <div className="flex flex-col gap-2 text-white">
       <label>{label}</label>
       <div className="w-full p-2 grid grid-cols-12 gap-1 rounded-md border border-[#424754] bg-[#1C1B1D]">
-        {colorList?.map((color) => {
+        {colorList.map((color) => {
           return (
-            <div
+            <button
+              type={"button"}
               key={color}
               style={{ backgroundColor: color }}
               className={`w-10 h-10 rounded-full  ${selectedColor === color ? "border-2 border-[#ffff]" : "border border-[#424754]"} cursor-pointer`}
@@ -53,7 +52,7 @@ const ColorSelection = <T extends FieldValues>(props: Props<T>) => {
                 setSelectedColor(color);
                 setter(name, color as PathValue<T, typeof name>);
               }}
-            ></div>
+            ></button>
           );
         })}
       </div>
