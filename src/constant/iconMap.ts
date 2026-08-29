@@ -23,6 +23,9 @@ import { FaShoppingCart } from "react-icons/fa";
 import { TbMeat } from "react-icons/tb";
 import { LuLogOut } from "react-icons/lu";
 import { FaRegMoneyBill1 } from "react-icons/fa6";
+import { CiBank } from "react-icons/ci";
+import { IoWalletOutline } from "react-icons/io5";
+import { GoAlert } from "react-icons/go";
 
 export const iconMap = {
   printer: FiPrinter,
@@ -51,4 +54,7 @@ export const iconMap = {
   meat: TbMeat,
   logout: LuLogOut,
   income: FaRegMoneyBill1,
+  bank:CiBank,
+  wallet:IoWalletOutline,
+  alert:GoAlert,
 } as const;
