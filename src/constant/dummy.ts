@@ -93,3 +93,40 @@ export const categoryList: CategoryType[] = [
     color: "#ADC6FF",
   },
 ];
+
+export type BudgetSummaryType = {
+  id: number;
+  heading: string;
+  value: string;
+  iconName: keyof typeof iconMap;
+  bgColor: string;
+  description?: string;
+  progressBar?: string;
+};
+
+export const budgetSummaryData: BudgetSummaryType[] = [
+  {
+    id: 1,
+    heading: "Total Budget",
+    value: "$12,450.00",
+    iconName: "bank",
+    bgColor: "#242A38",
+    description: "↗ +12% vs last month",
+  },
+  {
+    id: 2,
+    heading: "Remaining Balance",
+    value: "$4,122.50",
+    iconName: "wallet",
+    bgColor: "#242A38",
+    progressBar: "33",
+  },
+  {
+    id: 3,
+    heading: "Active Alerts",
+    value: "3 Alerts",
+    iconName: "alert",
+    bgColor: "#40191D",
+    description: "2 Categories over-budget",
+  },
+];
