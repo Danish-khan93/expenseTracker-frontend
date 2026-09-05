@@ -54,6 +54,7 @@ const CustomInput = <T extends FieldValues>(props: Props<T>) => {
 
         {type === "password" && (
           <button
+            type="button"
             onClick={() => {
               setShowPassword(!showPassword);
             }}

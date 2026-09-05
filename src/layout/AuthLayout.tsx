@@ -46,7 +46,7 @@ const AuthLayout = () => {
         </div>
       </div>
 
-      <div className=" text-white ">
+      <div className=" text-white  ">
         <Outlet />
       </div>
     </div>
