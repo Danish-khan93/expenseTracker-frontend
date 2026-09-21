@@ -1,7 +1,11 @@
 import { useForm } from "react-hook-form";
 import { CustomButton, CustomInput, CustomText } from "../../../components";
 import { Link } from "react-router-dom";
-
+import { yupResolver } from "@hookform/resolvers/yup";
+import { signupSchema } from "../auth.schema";
+import { apiHandler } from "../../../api/apihandler";
+import { useState } from "react";
+// import { toast } from "react-toastify";
 type SignupFormType = {
   fullName: string;
   email: string;
@@ -10,18 +14,35 @@ type SignupFormType = {
 };
 
 const SignUpForm = () => {
-  const { register, handleSubmit } = useForm<SignupFormType>({
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<SignupFormType>({
     defaultValues: {
       fullName: "",
       email: "",
       password: "",
       confirmPassword: "",
     },
+    resolver: yupResolver(signupSchema),
   });
 
   // signupform
-  const onSubmit = (values: SignupFormType) => {
-    console.log(values);
+  const onSubmit = async (values: SignupFormType) => {
+    setIsLoading(true);
+    const { confirmPassword, ...payload } = values;
+
+    try {
+      const res = await apiHandler("post", "/auth/register", payload);
+      setIsLoading(false);
+      console.log(res);
+    } catch (error) {
+      setIsLoading(false);
+      console.log(error);
+    }
   };
 
   return (
@@ -43,6 +64,8 @@ const SignUpForm = () => {
           label="Full Name"
           icon={true}
           iconName="profile"
+          formatType="capitalCase"
+          error={errors.fullName?.message}
         />
         <CustomInput
           name="email"
@@ -51,6 +74,7 @@ const SignUpForm = () => {
           label="Email"
           icon={true}
           iconName={"email"}
+          error={errors.email?.message}
         />
         <CustomInput
           name="password"
@@ -59,6 +83,7 @@ const SignUpForm = () => {
           label="Password"
           icon={true}
           iconName={"password"}
+          error={errors.password?.message}
         />
         <CustomInput
           name="confirmPassword"
@@ -67,8 +92,9 @@ const SignUpForm = () => {
           label="Confirm Password"
           icon={true}
           iconName={"shield"}
+          error={errors.confirmPassword?.message}
         />
-        <CustomButton type="submit" variant="text">
+        <CustomButton type="submit" variant="text" loading={isLoading}>
           Create Account
         </CustomButton>
       </form>

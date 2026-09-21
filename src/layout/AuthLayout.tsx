@@ -6,10 +6,10 @@ import { BsGraphDown } from "react-icons/bs";
 
 const AuthLayout = () => {
   return (
-    <div className="h-screen grid sm:grid-cols-2 grid-cols-1 divide-x-3 divide-solid divide-indigo-500 bg-[#131315] p-2">
+    <div className="h-full grid sm:grid-cols-2 grid-cols-1 divide-x-3 divide-solid divide-indigo-500 bg-[#131315] p-2">
       <div className="hidden sm:flex flex-col gap-4 items-start justify-center w-full p-4 relative">
         <div className="grid grid-cols-2 w-full absolute">
-          <div className="h-screen w-full bg-linear-to-t from-[#adc6ff32] to-[#adc6ff3e] blur-3xl scale-125"></div>
+          <div className="w-full bg-linear-to-t from-[#adc6ff32] to-[#adc6ff3e] blur-3xl scale-125"></div>
         </div>
         <div className="text-[#ADC6FF] flex items-center gap-2 z-20">
           <div className="text-[#002E6A] p-1 bg-[#ADC6FF] rounded-md">
