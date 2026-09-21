@@ -10,6 +10,7 @@ type Props = {
   icon?: keyof typeof iconMap;
   minWidth?: string;
   handleClick?: () => void;
+  loading?: boolean;
 };
 
 const CustomButton: FC<Props> = (props) => {
@@ -22,6 +23,7 @@ const CustomButton: FC<Props> = (props) => {
     icon,
     minWidth = "w-full",
     handleClick,
+    loading = false,
   } = props;
 
   const commonStyles = `px-4 py-1 rounded bg-[#ADC6FF] font-semibold text-[#002E6A] hover:bg-[#ADC6FF] focus:outline-none focus:ring-2 focus:ring-[#ADC6FF] focus:ring-opacity-75 ${minWidth}`;
@@ -33,16 +35,41 @@ const CustomButton: FC<Props> = (props) => {
       className={variant === "icon" ? iconStyle : commonStyles}
     >
       {variant === "text" ? (
-        <div>{children}</div>
-      ) : variant === "textIcon" ? (
-        <div
-          className={`flex items-center justify-center gap-3 ${startIcon ? "flex-row" : "flex-row-reverse"} `}
-        >
-          <div>{icon && <CustomIcon iconName={icon} />}</div>
-          <div>{children}</div>
+        <div>
+          {loading ? (
+            <svg
+              className="mr-3 size-5 animate-spin ..."
+              viewBox="0 0 24 24"
+            ></svg>
+          ) : (
+            children
+          )}
         </div>
+      ) : variant === "textIcon" ? (
+        loading ? (
+          <svg
+            className="mr-3 size-5 animate-spin ..."
+            viewBox="0 0 24 24"
+          ></svg>
+        ) : (
+          <div
+            className={`flex items-center justify-center gap-3 ${startIcon ? "flex-row" : "flex-row-reverse"} `}
+          >
+            <div>{icon && <CustomIcon iconName={icon} />}</div>
+            <div>{children}</div>
+          </div>
+        )
       ) : (
-        <div>{icon && <CustomIcon iconName={icon} />}</div>
+        <div>
+          {loading ? (
+            <svg
+              className="mr-3 size-5 animate-spin ..."
+              viewBox="0 0 24 24"
+            ></svg>
+          ) : (
+            icon && <CustomIcon iconName={icon} />
+          )}
+        </div>
       )}
     </button>
   );

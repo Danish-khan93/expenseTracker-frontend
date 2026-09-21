@@ -10,7 +10,8 @@ type Props<T extends FieldValues> = {
   label: string;
   name: Path<T>;
   register: UseFormRegister<T>;
-  formatType: "capitalCase" | "lowerCase";
+  formatType?: "capitalCase" | "lowerCase";
+  error?: string;
 };
 
 const CustomInput = <T extends FieldValues>(props: Props<T>) => {
@@ -22,18 +23,20 @@ const CustomInput = <T extends FieldValues>(props: Props<T>) => {
     name,
     register,
     formatType,
+    error,
   } = props;
-
-  console.log("CustomInput render:", name);
 
   // password visibility toggle state
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const registration = register(name);
+
   return (
     <div className="text-white flex flex-col items-start gap-1 w-full">
       <label htmlFor={name}>{label}</label>
 
-      <div className="w-full bg-[#1C1B1D] border-2 border-[#424754] rounded-md p-2 flex items-center gap-1">
+      <div
+        className={`w-full bg-[#1C1B1D] border-2 ${error && "border-r-red-500 border-r-4"}  border-[#424754] rounded-md p-2 flex items-center gap-1`}
+      >
         {icon === true && iconName && <CustomIcon iconName={iconName} />}
         <input
           {...registration}
@@ -42,13 +45,17 @@ const CustomInput = <T extends FieldValues>(props: Props<T>) => {
           className="border-none focus:outline-none w-full"
           type={type === "password" && showPassword ? "text" : type}
           onChange={(e: ChangeEvent<HTMLInputElement>) => {
-            const formattedValue = inputFormating(e.target.value, formatType);
+            if (formatType) {
+              const formattedValue = inputFormating(e.target.value, formatType);
 
-            // Show formatted value in the input
-            e.target.value = formattedValue;
+              // Show formatted value in the input
+              e.target.value = formattedValue;
 
-            // Save formatted value in React Hook Form
-            registration.onChange(e);
+              // Save formatted value in React Hook Form
+              registration.onChange(e);
+            } else {
+              registration.onChange(e);
+            }
           }}
         />
 
@@ -67,6 +74,7 @@ const CustomInput = <T extends FieldValues>(props: Props<T>) => {
           </button>
         )}
       </div>
+      <p className="text-sm text-red-400">{error}</p>
     </div>
   );
 };
