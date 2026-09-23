@@ -3,7 +3,11 @@ import { axiosInstance } from "./axiosInstence";
 
 type METHOD = "get" | "post" | "put" | "patch" | "delete";
 
-export const apiHandler = async <T>(method: METHOD, url: string, data?: T) => {
+export const apiHandler = async <T, R>(
+  method: METHOD,
+  url: string,
+  data?: T,
+): Promise<R> => {
   try {
     const response = await axiosInstance.request({
       method,

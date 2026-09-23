@@ -13,3 +13,18 @@ export interface userPayload {
   email: string;
   password: string;
 }
+
+export interface ResponseType {
+  fullName: string;
+    email: string;
+    createdAt: Date;
+    updatedAt: Date;
+    id: number;
+}
+
+export interface ErrorTyp{
+   code: number,
+    status: "failed",
+    message: string,
+    error: string[],
+}

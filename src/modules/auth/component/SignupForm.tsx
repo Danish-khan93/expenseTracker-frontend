@@ -5,7 +5,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { signupSchema } from "../auth.schema";
 import { apiHandler } from "../../../api/apihandler";
 import { useState } from "react";
-// import { toast } from "react-toastify";
+import { toast } from "react-toastify";
+import type { ErrorTyp, ResponseType } from "../auth.type";
+import { useNavigate } from "react-router-dom";
 type SignupFormType = {
   fullName: string;
   email: string;
@@ -15,6 +17,8 @@ type SignupFormType = {
 
 const SignUpForm = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const navigate = useNavigate();
 
   const {
     register,
@@ -36,11 +40,20 @@ const SignUpForm = () => {
     const { confirmPassword, ...payload } = values;
 
     try {
-      const res = await apiHandler("post", "/auth/register", payload);
+      const res = await apiHandler<typeof payload, ResponseType>(
+        "post",
+        "/auth/register",
+        payload,
+      );
       setIsLoading(false);
       console.log(res);
+      localStorage.setItem("user", JSON.stringify(res));
+      toast.success("Login Successfully");
+      navigate("/dashboard");
     } catch (error) {
+      const err = error as ErrorTyp;
       setIsLoading(false);
+      toast.error(err?.message);
       console.log(error);
     }
   };
