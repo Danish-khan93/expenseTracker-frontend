@@ -1,6 +1,7 @@
 import type { FC } from "react";
 import CustomIcon from "./CustomIcon";
 import type { iconMap } from "../constant/iconMap";
+import LoaderSvg from "./LoaderSvg";
 
 type Props = {
   type: "button" | "submit" | "reset";
@@ -47,28 +48,20 @@ const CustomButton: FC<Props> = (props) => {
         </div>
       ) : variant === "textIcon" ? (
         loading ? (
-          <svg
-            className="mr-3 size-5 animate-spin ..."
-            viewBox="0 0 24 24"
-          ></svg>
+          <LoaderSvg />
         ) : (
           <div
             className={`flex items-center justify-center gap-3 ${startIcon ? "flex-row" : "flex-row-reverse"} `}
           >
-            <div>{icon && <CustomIcon iconName={icon} />}</div>
+            <div>
+              {loading ? <LoaderSvg /> : icon && <CustomIcon iconName={icon} />}
+            </div>
             <div>{children}</div>
           </div>
         )
       ) : (
         <div>
-          {loading ? (
-            <svg
-              className="mr-3 size-5 animate-spin ..."
-              viewBox="0 0 24 24"
-            ></svg>
-          ) : (
-            icon && <CustomIcon iconName={icon} />
-          )}
+          {loading ? <LoaderSvg /> : icon && <CustomIcon iconName={icon} />}
         </div>
       )}
     </button>
