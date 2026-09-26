@@ -14,17 +14,12 @@ export interface userPayload {
   password: string;
 }
 
-export interface ResponseType {
+export interface AuthResponseType {
   fullName: string;
-    email: string;
-    createdAt: Date;
-    updatedAt: Date;
-    id: number;
+  email: string;
+  createdAt: Date;
+  updatedAt: Date;
+  id: number;
 }
 
-export interface ErrorTyp{
-   code: number,
-    status: "failed",
-    message: string,
-    error: string[],
-}
+

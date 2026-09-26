@@ -6,8 +6,9 @@ import { signupSchema } from "../auth.schema";
 import { apiHandler } from "../../../api/apihandler";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import type { ErrorTyp, ResponseType } from "../auth.type";
+import type {  AuthResponseType } from "../auth.type";
 import { useNavigate } from "react-router-dom";
+import type { ApiResponse, ErrorType } from "../../../type/golbalTypes";
 type SignupFormType = {
   fullName: string;
   email: string;
@@ -40,21 +41,19 @@ const SignUpForm = () => {
     const { confirmPassword, ...payload } = values;
 
     try {
-      const res = await apiHandler<typeof payload, ResponseType>(
+      const res = await apiHandler<typeof payload, ApiResponse<AuthResponseType>>(
         "post",
         "/auth/register",
         payload,
       );
       setIsLoading(false);
-      console.log(res);
       localStorage.setItem("user", JSON.stringify(res));
       toast.success("Login Successfully");
       navigate("/dashboard");
     } catch (error) {
-      const err = error as ErrorTyp;
+      const err = error as ErrorType;
       setIsLoading(false);
       toast.error(err?.message);
-      console.log(error);
     }
   };
 
