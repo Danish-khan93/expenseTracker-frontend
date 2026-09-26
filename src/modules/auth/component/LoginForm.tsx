@@ -1,13 +1,24 @@
 import { useForm } from "react-hook-form";
 import { CustomButton, CustomInput, CustomText } from "../../../components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { apiHandler } from "../../../api/apihandler";
+import type { AuthResponseType } from "../auth.type";
+import { toast } from "react-toastify";
+import { useState } from "react";
+import type { ApiResponse, ErrorType } from "../../../type/golbalTypes";
 
 type LoginFormType = {
   email: string;
   password: string;
 };
 
+type TRequest = LoginFormType;
+
 const LoginForm = () => {
+  const navigate = useNavigate();
+
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const { register, handleSubmit } = useForm<LoginFormType>({
     defaultValues: {
       email: "",
@@ -17,8 +28,23 @@ const LoginForm = () => {
 
   // form submit function
 
-  const onSubmit = (values: LoginFormType) => {
+  const onSubmit = async (values: LoginFormType) => {
     console.log(values);
+    try {
+      const response = await apiHandler<
+        TRequest,
+        ApiResponse<AuthResponseType>
+      >("post", "/auth/login", values);
+      console.log(response);
+      localStorage.setItem("user", JSON.stringify(response?.data));
+      toast.success("Login Successfully");
+      navigate("/dashboard");
+    } catch (error) {
+      const err = error as ErrorType;
+      setIsLoading(false);
+      toast.error(err?.message);
+      console.log(error);
+    }
   };
 
   return (
@@ -53,7 +79,7 @@ const LoginForm = () => {
           iconName={"password"}
         />
 
-        <CustomButton type="submit" variant="text">
+        <CustomButton type="submit" variant="text" loading={isLoading}>
           Sign In
         </CustomButton>
       </form>

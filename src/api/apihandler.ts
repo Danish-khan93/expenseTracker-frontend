@@ -14,6 +14,7 @@ export const apiHandler = async <T, R>(
       url,
       data,
     });
+    console.log(response);
 
     return response.data;
   } catch (error) {
