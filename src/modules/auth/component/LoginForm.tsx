@@ -29,13 +29,12 @@ const LoginForm = () => {
   // form submit function
 
   const onSubmit = async (values: LoginFormType) => {
-    console.log(values);
+    
     try {
       const response = await apiHandler<
         TRequest,
         ApiResponse<AuthResponseType>
       >("post", "/auth/login", values);
-      console.log(response);
       localStorage.setItem("user", JSON.stringify(response?.data));
       toast.success("Login Successfully");
       navigate("/dashboard");
@@ -43,7 +42,6 @@ const LoginForm = () => {
       const err = error as ErrorType;
       setIsLoading(false);
       toast.error(err?.message);
-      console.log(error);
     }
   };
 

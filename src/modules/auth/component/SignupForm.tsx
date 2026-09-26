@@ -47,7 +47,6 @@ const SignUpForm = () => {
         payload,
       );
       setIsLoading(false);
-      console.log(res);
       localStorage.setItem("user", JSON.stringify(res));
       toast.success("Login Successfully");
       navigate("/dashboard");
@@ -55,7 +54,6 @@ const SignUpForm = () => {
       const err = error as ErrorType;
       setIsLoading(false);
       toast.error(err?.message);
-      console.log(error);
     }
   };
 
