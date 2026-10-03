@@ -14,13 +14,22 @@ type Props<T extends FieldValues> = {
   dropDownList: { value: string; id: number }[];
   register: UseFormRegister<T>;
   setter: UseFormSetValue<T>;
+  selectAll?: boolean;
 };
 
 const CustomSelectBox = <T extends FieldValues>(props: Props<T>) => {
-  const { name, label, dropDownList, setName, register, setter } = props;
+  const {
+    name,
+    label,
+    dropDownList,
+    setName,
+    register,
+    setter,
+    selectAll = true,
+  } = props;
 
   return (
-    <div className="flex flex-col gap-1 item-start text-white">
+    <div className="flex flex-col gap-1 item-start text-white w-full">
       <label htmlFor={name}>{label}</label>
       <select
         {...register(name)}
@@ -30,12 +39,12 @@ const CustomSelectBox = <T extends FieldValues>(props: Props<T>) => {
         onChange={(e: ChangeEvent<HTMLSelectElement>) => {
           const id = e?.target?.value;
           const findVal = dropDownList?.find((val) => val?.id === +id);
-        
+
           setter(name, findVal?.id as PathValue<T, typeof name>);
           setter(setName, findVal?.value as PathValue<T, typeof name>);
         }}
       >
-        <option>Select All</option>
+        {selectAll && <option>Select All</option>}
         {dropDownList?.map((list) => {
           return (
             <option key={list?.id} value={list?.id}>
