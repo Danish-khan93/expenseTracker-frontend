@@ -4,7 +4,7 @@ import type { ButtonListType } from "../constant/categoryConstant";
 
 type Props = {
   listButton: ButtonListType[];
-  setCategoryType: Dispatch<SetStateAction<"expense" | "income">>;
+  setCategoryType: Dispatch<SetStateAction<"Expense" | "Income">>;
 };
 
 const CustomSwitch: FC<Props> = (props) => {

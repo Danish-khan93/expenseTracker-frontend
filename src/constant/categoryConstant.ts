@@ -1,10 +1,10 @@
 export type ButtonListType = {
   title: string;
   id: number;
-  type: "expense" | "income";
+  type: "Expense" | "Income";
 };
 
 export const buttonList: ButtonListType[] = [
-  { title: "Expense", id: 1, type: "expense" },
-  { title: "Income", id: 2, type: "income" },
+  { title: "Expense", id: 1, type: "Expense" },
+  { title: "Income", id: 2, type: "Income" },
 ];

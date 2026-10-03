@@ -57,4 +57,4 @@ export const iconMap = {
   bank:CiBank,
   wallet:IoWalletOutline,
   alert:GoAlert,
-} as const;
+} ;

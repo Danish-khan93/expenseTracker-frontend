@@ -68,31 +68,15 @@ export const dropDownListDummy = [
 
 export type CategoryType = {
   id: number;
+  type: "Expense" | "Income";
+  userId: number;
   categoryName: string;
-  iconName: keyof typeof iconMap;
+  // icon: keyof typeof iconMap;
+  icon: string;
   color: string;
+  createdAt: string;
+  updatedAt: string;
 };
-
-export const categoryList: CategoryType[] = [
-  {
-    id: 1,
-    categoryName: "Home",
-    iconName: "home",
-    color: "#ADC6FF",
-  },
-  {
-    id: 2,
-    categoryName: "Home",
-    iconName: "transport",
-    color: "#ADC6FF",
-  },
-  {
-    id: 3,
-    categoryName: "Home",
-    iconName: "food",
-    color: "#ADC6FF",
-  },
-];
 
 export type BudgetSummaryType = {
   id: number;

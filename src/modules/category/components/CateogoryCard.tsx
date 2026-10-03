@@ -1,21 +1,30 @@
 import type { FC } from "react";
 import CustomIcon from "../../../components/CustomIcon";
-import type { iconMap } from "../../../constant/iconMap";
 import { CustomText } from "../../../components";
+import { Link } from "react-router-dom";
 
 type Props = {
   color: string;
-  iconName: keyof typeof iconMap;
+  iconName: string;
   categoryName: string;
   spending: number;
+  id: number;
 };
 
 const CateogoryCard: FC<Props> = (props) => {
-  const { color, iconName, categoryName, spending } = props;
+  const { id, color, iconName, categoryName, spending } = props;
+  console.log(id);
+
   return (
-    <div className="border border-[#C2C6D6] bg-[#1C1B1D] rounded-md p-2 ">
+    <Link
+      to={`${id}`}
+      className="border border-[#C2C6D6] bg-[#1C1B1D] rounded-md p-2 "
+    >
       <div
-        className={`bg-[${color}] p-1 flex justify-center items-center w-10 h-10 text-black rounded-md`}
+        style={{
+          backgroundColor: color,
+        }}
+        className={`p-1 flex justify-center items-center w-10 h-10 text-black rounded-md`}
       >
         <CustomIcon iconName={iconName} />
       </div>
@@ -24,7 +33,7 @@ const CateogoryCard: FC<Props> = (props) => {
         <CustomText variant="p">{`${spending}`} </CustomText>
       </div>
       <div>progressbar</div>
-    </div>
+    </Link>
   );
 };
 
