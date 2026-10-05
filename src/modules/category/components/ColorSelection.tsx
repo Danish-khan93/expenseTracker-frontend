@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type {
   FieldValues,
   Path,
@@ -31,12 +31,20 @@ type Props<T extends FieldValues> = {
   name: Path<T>;
   setter: UseFormSetValue<T>;
   label: string;
+  valueWhenUpdate?: string;
 };
 
 const ColorSelection = <T extends FieldValues>(props: Props<T>) => {
-  const { name, setter, label } = props;
+  const { name, setter, label, valueWhenUpdate } = props;
 
   const [selectedColor, setSelectedColor] = useState<string>("");
+
+  useEffect(() => {
+    if (valueWhenUpdate) {
+      setSelectedColor(valueWhenUpdate);
+    }
+  }, [valueWhenUpdate]);
+
   return (
     <div className="flex flex-col gap-2 text-white">
       <label>{label}</label>

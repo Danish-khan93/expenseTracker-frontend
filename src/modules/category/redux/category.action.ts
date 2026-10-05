@@ -4,12 +4,15 @@ import type { CategoryFormType } from "../pages/CategoiesFormPage";
 import type {
   CategoryResponseType,
   CreateCategoryReqData,
+  formDataTypeForUpdate,
   SingleCategoryType,
 } from "../categoryType";
-import type { AxiosError } from "axios";
+
+import type { ErrorType } from "../../../type/golbalTypes";
 // get all cateogries
 
 type Type = "Expense" | "Income";
+type ID = string;
 
 const storeUser = localStorage.getItem("user");
 const user = storeUser ? JSON.parse(storeUser) : null;
@@ -17,7 +20,8 @@ const userId = user?.id;
 
 export const getAllCategories = createAsyncThunk<
   CategoryResponseType<SingleCategoryType[]>,
-  Type
+  Type,
+  { rejectValue: ErrorType }
 >("cateogry/getAllCategories", async (data: Type, { rejectWithValue }) => {
   try {
     const response = await apiHandler<
@@ -27,17 +31,15 @@ export const getAllCategories = createAsyncThunk<
     console.log(response);
     return response;
   } catch (error) {
-    const err = error as AxiosError;
-    console.log(err);
-
-    throw rejectWithValue(err);
+    throw rejectWithValue(error as ErrorType);
   }
 });
 
 // create cateogroy
 export const createCategory = createAsyncThunk<
   CategoryResponseType<SingleCategoryType>,
-  CategoryFormType
+  CategoryFormType,
+  { rejectValue: ErrorType }
 >(
   "cateogry/createCategory",
   async (data: CategoryFormType, { rejectWithValue }) => {
@@ -53,25 +55,45 @@ export const createCategory = createAsyncThunk<
       return response;
     } catch (error) {
       console.log(error);
-
-      return rejectWithValue(error);
+      return rejectWithValue(error as ErrorType);
     }
   },
 );
 
 // get by id cateogory
-export const getByIdCategory = createAsyncThunk(
-  "cateogry/getByIdCategory",
-  async () => {
-    try {
-    } catch (error) {}
-  },
-);
+export const getByIdCategory = createAsyncThunk<
+  CategoryResponseType<SingleCategoryType>,
+  ID,
+  { rejectValue: ErrorType }
+>("cateogry/getByIdCategory", async (id: ID, { rejectWithValue }) => {
+  try {
+    const response = await apiHandler<
+      ID,
+      CategoryResponseType<SingleCategoryType>
+    >("get", `category/categoryById/${id}`);
+    console.log(response);
+    return response;
+  } catch (error) {
+    return rejectWithValue(error as ErrorType);
+  }
+});
 // update by id cateogory
-export const updateByIdCategory = createAsyncThunk(
-  "cateogry/updateByIdCategory",
-  async () => {
-    try {
-    } catch (error) {}
-  },
-);
+export const updateByIdCategory = createAsyncThunk<
+  CategoryResponseType<SingleCategoryType>,
+  formDataTypeForUpdate,
+  { rejectValue: ErrorType }
+>("cateogry/updateByIdCategory", async (data, { rejectWithValue }) => {
+  try {
+    const { id, ...payload } = data;
+    const response = await apiHandler<
+      Omit<formDataTypeForUpdate, "id">,
+      CategoryResponseType<SingleCategoryType>
+    >("patch", `updateCateogryById/${id}`, payload);
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.log(error as ErrorType);
+
+    return rejectWithValue(error as ErrorType);
+  }
+});

@@ -1,3 +1,4 @@
+import type { ErrorType } from "../../type/golbalTypes";
 import type { CategoryFormType } from "./pages/CategoiesFormPage";
 
 export type CategoryDropDownType = {
@@ -22,6 +23,7 @@ export type SingleCategoryType = {
   // iconName: keyof typeof iconMap;
   icon: string;
   color: string;
+  description: string;
   createdAt: string;
   updatedAt: string;
 };
@@ -30,5 +32,8 @@ export type InitialStateCategory = {
   loading: boolean;
   expense: SingleCategoryType[] | [];
   income: SingleCategoryType[] | [];
-  error: null | unknown;
+  singleCategoryData: SingleCategoryType | null;
+  error: ErrorType | null;
 };
+
+export type formDataTypeForUpdate = CategoryFormType & { id: string };

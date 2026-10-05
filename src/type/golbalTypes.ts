@@ -8,7 +8,7 @@ export interface ApiResponse<T> {
 
 export interface ErrorType {
   code: number;
-  status: "failed";
+  status: string;
   message: string;
-  error: string[];
+  error: unknown[];
 }
