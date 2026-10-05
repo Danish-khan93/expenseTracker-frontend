@@ -55,6 +55,10 @@ export const router = createBrowserRouter([
         path: "/categories/form",
       },
       {
+        element: <CategoiesFormPage />,
+        path: "/categories/:id",
+      },
+      {
         element: <Income />,
         path: "/income",
       },

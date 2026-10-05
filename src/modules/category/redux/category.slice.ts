@@ -1,11 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getAllCategories } from "./category.action";
+import { getAllCategories, getByIdCategory } from "./category.action";
 import type { InitialStateCategory } from "../categoryType";
 
 const initialState: InitialStateCategory = {
   loading: false,
   expense: [],
   income: [],
+  singleCategoryData: null,
   error: null,
 };
 
@@ -27,7 +28,22 @@ const categorySlice = createSlice({
       state.loading = false;
       console.log(payload);
 
-      state.error = payload?.error;
+      state.error = payload ?? null;
+    });
+
+    // single data set
+
+    builder.addCase(getByIdCategory.pending, (state) => {
+      state.loading = true;
+    });
+
+    builder.addCase(getByIdCategory.fulfilled, (state, { payload }) => {
+      state.loading = false;
+      state.singleCategoryData = payload?.data;
+    });
+
+    builder.addCase(getByIdCategory.rejected, (state, { payload }) => {
+      state.error = payload ?? null;
     });
   },
 });

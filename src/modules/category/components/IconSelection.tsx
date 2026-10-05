@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { iconMap } from "../../../constant/iconMap";
 import CustomIcon from "../../../components/CustomIcon";
 import type {
@@ -12,20 +12,21 @@ type Props<T extends FieldValues> = {
   name: Path<T>;
   setter: UseFormSetValue<T>;
   label: string;
+  valueWhenUpdate?: string;
 };
 
-
-
- const iconList = Object.keys(iconMap) as (keyof typeof iconMap)[];
+const iconList = Object.keys(iconMap) as (keyof typeof iconMap)[];
 
 const IconSelection = <T extends FieldValues>(props: Props<T>) => {
-  const { name, setter, label } = props;
-  //   const [iconList, setIconList] = useState<(keyof typeof iconMap)[]>([]);
-  const [selectedIcon, setSelectedIcon] = useState<keyof typeof iconMap | "">(
-    "",
-  );
+  const { name, setter, label, valueWhenUpdate } = props;
 
- 
+  const [selectedIcon, setSelectedIcon] = useState<string>();
+
+  useEffect(() => {
+    if (valueWhenUpdate) {
+      setSelectedIcon(valueWhenUpdate);
+    }
+  }, [valueWhenUpdate]);
 
   return (
     <div className="flex flex-col gap-2 text-white">
@@ -41,7 +42,10 @@ const IconSelection = <T extends FieldValues>(props: Props<T>) => {
                 setSelectedIcon(value);
                 setter(name, value as PathValue<T, typeof name>);
               }}
-              className={`cursor-pointer rounded-md w-15 h-15 flex justify-center items-center gap-2 flex-noWrap ${selectedIcon === value ? "bg-[#3A4A5F]" : "bg-[#2d2c2e]"} text-white`}
+              style={{
+                backgroundColor: selectedIcon === value ? "#3A4A5F" : "#2d2c2e",
+              }}
+              className={`cursor-pointer rounded-md w-15 h-15 flex justify-center items-center gap-2 flex-noWrap text-white`}
             >
               <CustomIcon iconName={value} />
             </button>
