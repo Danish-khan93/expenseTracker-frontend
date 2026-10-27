@@ -46,6 +46,8 @@ const SignUpForm = () => {
         ApiResponse<AuthResponseType>
       >("post", "/auth/register", payload);
       setIsLoading(false);
+      console.log(res?.data);
+
       localStorage.setItem("user", JSON.stringify(res?.data));
       toast.success("Login Successfully");
       navigate("/dashboard");

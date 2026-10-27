@@ -77,6 +77,7 @@ const CategoiesFormPage = () => {
   const getFormValues = getValues();
 
   const onSubmit = async (values: CategoryFormType): Promise<void> => {
+    console.log(values);
     try {
       if (id) {
         const updateData = {

@@ -7,6 +7,10 @@ import {
   CustomText,
 } from "../../../components";
 import { dropDownListDummy } from "../../../constant/dummy";
+import { useDispatch, useSelector } from "react-redux";
+import type { AppDispatch, RootState } from "../../../app/store";
+import { useLayoutEffect } from "react";
+import { getAllCategories } from "../../category/redux/category.action";
 
 type ExpenseForm = {
   amount: number;
@@ -20,6 +24,18 @@ type ExpenseForm = {
 };
 
 const ExpenseForm = () => {
+  const dispatch = useDispatch<AppDispatch>();
+
+  const expense = useSelector((state: RootState) => {
+    return state?.Category?.expense;
+  });
+
+  useLayoutEffect(() => {
+    if (expense?.length === 0) {
+      dispatch(getAllCategories("Expense"));
+    }
+  }, [expense?.length]);
+
   const { register, handleSubmit, setValue } = useForm<ExpenseForm>({
     defaultValues: {
       amount: 0,
@@ -75,7 +91,12 @@ const ExpenseForm = () => {
           name="expenseCategoryId"
           setName="expenseCategoryName"
           label="Category"
-          dropDownList={dropDownListDummy}
+          dropDownList={expense?.map((items) => {
+            return {
+              id: items.id,
+              value: items.categoryName,
+            };
+          })}
         />
         <CustomSelectBox
           setter={setValue}

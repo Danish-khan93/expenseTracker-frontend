@@ -3,6 +3,7 @@ import CustomText from "./CustomText";
 import { RiWallet3Fill } from "react-icons/ri";
 import CustomIcon from "./CustomIcon";
 import type { sideBarType } from "../type/sideBarType";
+import { apiHandler } from "../api/apihandler";
 const SideBar = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -41,6 +42,17 @@ const SideBar = () => {
     },
   ];
 
+  const handleLogout = async () => {
+    try {
+      const res = await apiHandler("get", "/auth/logout");
+      console.log(res);
+      localStorage.removeItem("user");
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="flex flex-col justify-between bg-[#1C1B1D] h-screen w-full shadow-amber-50 text-white border-r border-[#424754] py-4 px-4">
       <div>
@@ -75,7 +87,7 @@ const SideBar = () => {
       <div>
         <div
           onClick={() => {
-            navigate("/");
+            handleLogout();
           }}
           className={`flex gap-2 items-center p-2 shadow-2xl rounded-md my-1 w-full hover:bg-[#3A4A5F] cursor-pointer `}
         >
