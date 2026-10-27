@@ -14,10 +14,6 @@ import type { ErrorType } from "../../../type/golbalTypes";
 type Type = "Expense" | "Income";
 type ID = string;
 
-const storeUser = localStorage.getItem("user");
-const user = storeUser ? JSON.parse(storeUser) : null;
-const userId = user?.id;
-
 export const getAllCategories = createAsyncThunk<
   CategoryResponseType<SingleCategoryType[]>,
   Type,
@@ -31,6 +27,7 @@ export const getAllCategories = createAsyncThunk<
     console.log(response);
     return response;
   } catch (error) {
+    console.log(error);
     throw rejectWithValue(error as ErrorType);
   }
 });
@@ -47,11 +44,8 @@ export const createCategory = createAsyncThunk<
       const response = await apiHandler<
         CreateCategoryReqData,
         CategoryResponseType<SingleCategoryType>
-      >("post", "category/create", {
-        ...data,
-        userId,
-      });
-      console.log(response);
+      >("post", "category/create", data);
+
       return response;
     } catch (error) {
       console.log(error);

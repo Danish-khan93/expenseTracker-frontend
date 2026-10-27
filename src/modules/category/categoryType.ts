@@ -13,7 +13,7 @@ export type CategoryResponseType<T> = {
   message: string;
 };
 
-export type CreateCategoryReqData = CategoryFormType & { userId: number };
+export type CreateCategoryReqData = CategoryFormType ;
 
 export type SingleCategoryType = {
   id: number;
