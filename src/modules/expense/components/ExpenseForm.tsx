@@ -6,29 +6,51 @@ import {
   CustomSelectBox,
   CustomText,
 } from "../../../components";
-import { dropDownListDummy } from "../../../constant/dummy";
+// import { paymentMethodsTypes } from "../../../constant/dummy";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../../../app/store";
-import { useLayoutEffect } from "react";
+import { useEffect, useLayoutEffect } from "react";
 import { getAllCategories } from "../../category/redux/category.action";
+import { apiHandler } from "../../../api/apihandler";
+import { toast } from "react-toastify";
+import type { ApiResponse, ErrorType } from "../../../type/golbalTypes";
+import { useNavigate, useParams } from "react-router-dom";
+import type { ExpenseResType } from "../../../constant/girdColumn";
+import { getExpensesById } from "../redux/expenseAction";
 
 type ExpenseForm = {
   amount: number;
   title: string;
   expenseCategoryId: number;
   expenseCategoryName: string;
-  paymentMetodeId: number;
+  paymentMetodeId?: number;
   paymentMetodeName: string;
   note: string;
-  date: string;
+  dateOfPayment: string;
+  statusId?: number;
+  statusName: string;
 };
 
 const ExpenseForm = () => {
   const dispatch = useDispatch<AppDispatch>();
-
+  const navigate = useNavigate();
+  const { id } = useParams();
   const expense = useSelector((state: RootState) => {
     return state?.Category?.expense;
   });
+
+  // get single expense data
+
+  const { singleExpense } = useSelector((state: RootState) => {
+    return state?.Expense;
+  });
+
+  useEffect(() => {
+    if (id) {
+      const paramId = Number(id);
+      dispatch(getExpensesById(paramId));
+    }
+  }, [id]);
 
   useLayoutEffect(() => {
     if (expense?.length === 0) {
@@ -36,21 +58,48 @@ const ExpenseForm = () => {
     }
   }, [expense?.length]);
 
-  const { register, handleSubmit, setValue } = useForm<ExpenseForm>({
-    defaultValues: {
-      amount: 0,
-      title: "",
-      expenseCategoryId: 0,
-      expenseCategoryName: "",
-      paymentMetodeId: 0,
-      paymentMetodeName: "",
-      note: "",
-      date: "",
-    },
+  const emptyForm: ExpenseForm = {
+    amount: 0,
+    title: "",
+    expenseCategoryId: 0,
+    expenseCategoryName: "",
+    paymentMetodeId: 0,
+    paymentMetodeName: "",
+    note: "",
+    dateOfPayment: "",
+    statusId: 0,
+    statusName: "",
+  };
+
+  // const formInitialValues = id ? (singleExpense ?? emptyForm) : emptyForm;
+
+  const { register, handleSubmit, setValue, reset } = useForm<ExpenseForm>({
+    defaultValues: emptyForm,
   });
 
-  const onSubmit = (data: ExpenseForm) => {
-    console.log(data);
+  useEffect(() => {
+    if (id && singleExpense) {
+      reset({
+        ...singleExpense,
+      });
+    }
+  }, [id, singleExpense, reset]);
+
+  const onSubmit = async (data: ExpenseForm) => {
+    // create expense form
+    try {
+      const response = await apiHandler<
+        ExpenseForm,
+        ApiResponse<ExpenseResType>
+      >("post", "/expense/createExpense", data);
+      if (response?.status === "success") {
+        toast.success(response?.message);
+        navigate("/expense");
+      }
+    } catch (error) {
+      const err = error as ErrorType;
+      toast.error(err?.message);
+    }
   };
 
   return (
@@ -62,9 +111,18 @@ const ExpenseForm = () => {
             Track your spending with high pricison
           </CustomText>
         </div>
-        <div>
+        <div className="flex gap-2 w-[50%]">
           <CustomButton icon="save" variant="textIcon" type="submit">
-            Save Transaction
+            {id ? "Update Transaction" : "Save Transaction"}
+          </CustomButton>
+          <CustomButton
+            variant="text"
+            type="button"
+            handleClick={() => {
+              navigate("/expense");
+            }}
+          >
+            Cancel
           </CustomButton>
         </div>
       </div>
@@ -86,6 +144,7 @@ const ExpenseForm = () => {
           formatType="lowerCase"
         />
         <CustomSelectBox
+          selectAll={true}
           setter={setValue}
           register={register}
           name="expenseCategoryId"
@@ -95,16 +154,28 @@ const ExpenseForm = () => {
             return {
               id: items.id,
               value: items.categoryName,
+              label: items.categoryName,
             };
           })}
         />
         <CustomSelectBox
+          selectAll={true}
           setter={setValue}
           register={register}
           name="paymentMetodeId"
           setName="paymentMetodeName"
           label="Payment Type"
-          dropDownList={dropDownListDummy}
+          // dropDownList={paymentMethodsTypes}
+          url="/dropDowns/getAllPaymentType"
+        />
+        <CustomSelectBox
+          selectAll={true}
+          setter={setValue}
+          register={register}
+          name="statusId"
+          setName="statusName"
+          label="Status"
+          url="/dropDowns/getStatus"
         />
         <CustomInput
           icon={false}
@@ -114,7 +185,11 @@ const ExpenseForm = () => {
           register={register}
           formatType="lowerCase"
         />
-        <CustomDatePicker label={"Date"} name="date" register={register} />
+        <CustomDatePicker
+          label={"Date"}
+          name="dateOfPayment"
+          register={register}
+        />
       </div>
     </form>
   );

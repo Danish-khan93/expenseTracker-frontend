@@ -18,8 +18,12 @@ axiosInstance.interceptors.response.use(
       try {
         const res = await axiosInstance.get("/auth/refresh");
         console.log(res);
+        if (res.data?.status === "success") {
+          originalRequest._retry = true;
+        }
       } catch (err) {
         console.log(err);
+        return Promise.reject(err);
       }
     }
     return Promise.reject(error);

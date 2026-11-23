@@ -29,7 +29,6 @@ const LoginForm = () => {
   // form submit function
 
   const onSubmit = async (values: LoginFormType) => {
-    
     try {
       const response = await apiHandler<
         TRequest,
@@ -46,7 +45,7 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="  flex flex-col gap-4 items-start justify-center w-full p-4">
+    <div className="flex flex-col gap-4 items-start justify-center w-full p-4 h-screen">
       <div className="w-full">
         <CustomText variant="h2">Welcome back</CustomText>
         <CustomText variant="p">

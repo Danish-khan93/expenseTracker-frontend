@@ -1,8 +1,10 @@
 export type ExpenseResType = {
-  date: string;
-  description: string;
   amount: number;
-  category: string;
+  title: string;
+  categoryName: string;
+  paymentMetodeName: string;
+  note: string;
+  dateOfPayment: string;
   status: string;
 };
 
@@ -20,10 +22,10 @@ export const expenseCols: ColumnType<ExpenseResType>[] = [
     header: "Date",
     align: "left",
     minWidth: "w-[120px]",
-    value: "date",
+    value: "dateOfPayment",
   },
   {
-    value: "description",
+    value: "note",
     header: "Description",
     align: "center",
   },
@@ -33,7 +35,7 @@ export const expenseCols: ColumnType<ExpenseResType>[] = [
     align: "center",
   },
   {
-    value: "category",
+    value: "categoryName",
     header: "Category",
     align: "center",
   },
@@ -45,34 +47,32 @@ export const expenseCols: ColumnType<ExpenseResType>[] = [
   },
 ];
 
-
-
 export const incomeCols: ColumnType<ExpenseResType>[] = [
-  {
-    header: "Date",
-    align: "left",
-    minWidth: "w-[120px]",
-    value: "date",
-  },
-  {
-    value: "description",
-    header: "Description",
-    align: "center",
-  },
-  {
-    value: "amount",
-    header: "Amount",
-    align: "center",
-  },
-  {
-    value: "category",
-    header: "Category",
-    align: "center",
-  },
-  {
-    value: "status",
-    header: "Status",
-    align: "center",
-    highlight: true,
-  },
+  // {
+  //   header: "Date",
+  //   align: "left",
+  //   minWidth: "w-[120px]",
+  //   value: "date",
+  // },
+  // {
+  //   value: "description",
+  //   header: "Description",
+  //   align: "center",
+  // },
+  // {
+  //   value: "amount",
+  //   header: "Amount",
+  //   align: "center",
+  // },
+  // {
+  //   value: "category",
+  //   header: "Category",
+  //   align: "center",
+  // },
+  // {
+  //   value: "status",
+  //   header: "Status",
+  //   align: "center",
+  //   highlight: true,
+  // },
 ];

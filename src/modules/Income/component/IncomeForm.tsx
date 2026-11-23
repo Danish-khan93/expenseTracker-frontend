@@ -6,7 +6,7 @@ import {
   CustomSelectBox,
   CustomText,
 } from "../../../components";
-import { dropDownListDummy } from "../../../constant/dummy";
+import { paymentMethodsTypes } from "../../../constant/dummy";
 
 type IncomeForm = {
   amount: number;
@@ -75,7 +75,7 @@ const IncomeForm = () => {
           name="incomeCategoryId"
           setName="incomeCategoryName"
           label="Income Type"
-          dropDownList={dropDownListDummy}
+          dropDownList={paymentMethodsTypes}
         />
         <CustomSelectBox
           setter={setValue}
@@ -83,7 +83,7 @@ const IncomeForm = () => {
           name="paymentMetodeId"
           setName="paymentMetodeName"
           label="Payment Type"
-          dropDownList={dropDownListDummy}
+          dropDownList={paymentMethodsTypes}
         />
         <CustomInput
           icon={false}

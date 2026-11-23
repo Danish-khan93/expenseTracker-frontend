@@ -28,7 +28,9 @@ const CustomInput = <T extends FieldValues>(props: Props<T>) => {
 
   // password visibility toggle state
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const registration = register(name);
+  const registration = register(name, {
+    valueAsNumber: type === "number",
+  });
 
   return (
     <div className="text-white flex flex-col items-start gap-1 w-full">
