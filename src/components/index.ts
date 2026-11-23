@@ -9,6 +9,7 @@ import CustomTable from "./CustomTable";
 import CustomDatePicker from "./CustomDatePicker";
 import CustomSwitch from "./CustomSwitch";
 import CustomProgressBar from "./CustomProgressBar";
+import CustomFileUplaod from "./CustomFileUplaod";
 export {
   CustomCheckBox,
   CustomButton,
@@ -21,4 +22,5 @@ export {
   CustomTable,
   CustomDatePicker,
   CustomSwitch,
+  CustomFileUplaod,
 };

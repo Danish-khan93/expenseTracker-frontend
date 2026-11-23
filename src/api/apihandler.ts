@@ -3,7 +3,7 @@ import { axiosInstance } from "./axiosInstence";
 
 type METHOD = "get" | "post" | "put" | "patch" | "delete";
 
-export const apiHandler = async <T, R>(
+export const apiHandler = async <T = undefined, R = unknown>(
   method: METHOD,
   url: string,
   data?: T,

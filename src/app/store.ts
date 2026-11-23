@@ -1,8 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import CategorySlice from "../modules/category/redux/category.slice.ts";
+import ExpenseSlice from "../modules/expense/redux/expenseSlice.ts";
+
 export const store = configureStore({
   reducer: {
     Category: CategorySlice,
+    Expense: ExpenseSlice,
   },
 });
 
