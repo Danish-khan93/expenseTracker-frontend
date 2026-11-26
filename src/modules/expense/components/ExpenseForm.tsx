@@ -73,7 +73,13 @@ const ExpenseForm = () => {
 
   // const formInitialValues = id ? (singleExpense ?? emptyForm) : emptyForm;
 
-  const { register, handleSubmit, setValue, reset } = useForm<ExpenseForm>({
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    reset,
+    formState: { dirtyFields },
+  } = useForm<ExpenseForm>({
     defaultValues: emptyForm,
   });
 
@@ -86,21 +92,50 @@ const ExpenseForm = () => {
   }, [id, singleExpense, reset]);
 
   const onSubmit = async (data: ExpenseForm) => {
-    // create expense form
-    try {
-      const response = await apiHandler<
-        ExpenseForm,
-        ApiResponse<ExpenseResType>
-      >("post", "/expense/createExpense", data);
-      if (response?.status === "success") {
-        toast.success(response?.message);
-        navigate("/expense");
+    if (id) {
+      const updatedObject: Partial<ExpenseForm> = {};
+      for (const key in dirtyFields) {
+        const field = key as keyof ExpenseForm;
+        if (dirtyFields[field]) {
+     
+
+          (updatedObject as Record<string, unknown>)[field] = data[field];
+        }
       }
-    } catch (error) {
-      const err = error as ErrorType;
-      toast.error(err?.message);
+
+      //  update the expense
+      try {
+        const response = await apiHandler<
+          Partial<ExpenseForm>,
+          ApiResponse<ExpenseResType>
+        >("patch", `/expense/updateExpense/${id}`, updatedObject);
+        if (response?.status === "success") {
+          toast.success(response?.message);
+          navigate("/expense");
+        }
+      } catch (error) {
+        const err = error as ErrorType;
+        toast.error(err?.message);
+      }
+    } else {
+      // create expense form
+      try {
+        const response = await apiHandler<
+          ExpenseForm,
+          ApiResponse<ExpenseResType>
+        >("post", "/expense/createExpense", data);
+        if (response?.status === "success") {
+          toast.success(response?.message);
+          navigate("/expense");
+        }
+      } catch (error) {
+        const err = error as ErrorType;
+        toast.error(err?.message);
+      }
     }
   };
+
+  console.log(dirtyFields);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
