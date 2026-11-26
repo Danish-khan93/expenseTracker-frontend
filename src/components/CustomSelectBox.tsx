@@ -56,21 +56,32 @@ const CustomSelectBox = <T extends FieldValues>(props: Props<T>) => {
   }, [url]);
 
   const listOption = dropDownOption?.length > 0 ? dropDownOption : dropDownList;
-
+  const registration = register(name);
   return (
     <div className="flex flex-col gap-1 item-start text-white w-full">
       <label htmlFor={name}>{label}</label>
       <select
-        {...register(name)}
+        {...registration}
         name={name}
         id={name}
         className="w-full bg-[#1C1B1D] text-white border-2 border-[#424754] rounded-md p-2 "
         onChange={(e: ChangeEvent<HTMLSelectElement>) => {
-          const id = e?.target?.value;
-          const findVal = listOption?.find((val) => val?.id === Number(id));
+          const selectedId = Number(e.target.value);
 
-          setter(name, findVal?.id as PathValue<T, typeof name>);
-          setter(setName, findVal?.value as PathValue<T, typeof name>);
+          const selectedOption = listOption?.find(
+            (item) => item.id === selectedId,
+          );
+          registration.onChange(e);
+
+          if (selectedOption) {
+            setter(
+              setName,
+              selectedOption.value as PathValue<T, typeof setName>,
+              {
+                shouldDirty: true,
+              },
+            );
+          }
         }}
       >
         {selectAll && <option>Select Any</option>}
